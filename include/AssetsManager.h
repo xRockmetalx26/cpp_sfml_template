@@ -8,6 +8,7 @@
 #include <memory>
 #include <map>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/Music.hpp>
 
 template<class Type>
@@ -38,5 +39,6 @@ private:
 
 using TextureManager = AssetsManager<sf::Texture>;
 using MusicManager = AssetsManager<sf::Music>;
+using FontManager = AssetsManager<sf::Font>;
 
 #endif // ASSETS_MANAGER_H
