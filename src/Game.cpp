@@ -12,7 +12,7 @@
 
 std::unique_ptr<Game> Game::instance{};
 
-Game::Game(const std::string &title, const Size &size, const std::string &icon, const uint16_t fps) {
+Game::Game(const std::string &title, const Size &size, const std::string &icon, const int fps) {
     SceneManager::new_scene_manager();
     RenderWindow::new_render_window(title, size, icon);
     LoopTimer::new_loop_timer(fps);

@@ -21,12 +21,12 @@ public:
     void run() const;
 
     static Game& new_game(const std::string &title = "SFML Template", const Size &size = Size{800, 600},
-                        const std::string &icon = "assets/images/icon.png", int fps = 60);
+        const std::string &icon = "assets/images/icon.png", int fps = 60);
     static Game& get_instance();
 
 private:
 
-    Game(const std::string &title, const Size &size, const std::string &icon, uint16_t fps);
+    Game(const std::string &title, const Size &size, const std::string &icon, int fps);
 
     static std::unique_ptr<Game> instance;
 };
