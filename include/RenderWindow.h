@@ -19,8 +19,7 @@ public:
     RenderWindow& operator = (const RenderWindow &&other) = delete;
     virtual ~RenderWindow();
 
-    static RenderWindow& new_render_window(const std::string &title, const Size &size,
-                                        const std::string &icon);
+    static RenderWindow& new_render_window(const std::string &title, const Size &size, const std::string &icon);
 
     static RenderWindow& get_instance();
     sf::RenderWindow& get_render_window() const;

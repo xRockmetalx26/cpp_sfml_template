@@ -10,9 +10,9 @@ CPP_FLAGS       := -std=c++2a -pedantic -Wextra -Wall -O3 -DNDEBUG
 # -I"your-directory" add include directory (files .h) (HEADERS)
 INCLUDE_DIRECTORIES  := -Iinclude 
 
-test: $(O_FILES)
+app: $(O_FILES)
 	g++ $^ -o $@ $(LIB_FILES)
-	test.exe
+	app.exe
 
 %.o: %.c
 	gcc -c $^ -o $@ $(INCLUDE_DIRECTORIES) $(C_FLAGS)
@@ -34,4 +34,4 @@ test: $(O_FILES)
 clean:
 	del src\*.o
 	del res\*.o
-	del test.exe
+	del app.exe

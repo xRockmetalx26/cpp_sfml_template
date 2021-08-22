@@ -22,6 +22,7 @@ public:
 
     static Game& new_game(const std::string &title = "SFML Template", const Size &size = Size{800, 600},
         const std::string &icon = "assets/images/icon.png", int fps = 60);
+
     static Game& get_instance();
 
 private:
