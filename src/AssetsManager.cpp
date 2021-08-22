@@ -6,8 +6,8 @@
 #include <AssetsManager.h>
 
 template class AssetsManager<sf::Texture>;
-template class AssetsManager<sf::Music>;
 template class AssetsManager<sf::Font>;
+template class AssetsManager<sf::Music>;
 
 template<class Type>
 std::unique_ptr<AssetsManager<Type>> AssetsManager<Type>::instance{};

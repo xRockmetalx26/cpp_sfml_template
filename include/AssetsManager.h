@@ -38,7 +38,7 @@ private:
 };
 
 using TextureManager = AssetsManager<sf::Texture>;
-using MusicManager = AssetsManager<sf::Music>;
 using FontManager = AssetsManager<sf::Font>;
+using MusicManager = AssetsManager<sf::Music>;
 
 #endif // ASSETS_MANAGER_H

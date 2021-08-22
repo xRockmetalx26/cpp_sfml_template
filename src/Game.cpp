@@ -17,6 +17,7 @@ Game::Game(const std::string &title, const Size &size, const std::string &icon, 
     RenderWindow::new_render_window(title, size, icon);
     LoopTimer::new_loop_timer(fps);
     TextureManager::new_assets_manager();
+    FontManager::new_assets_manager();
     MusicManager::new_assets_manager();
 
     std::puts("OK Game().");
