@@ -6,13 +6,13 @@
 #include <SceneMain.h>
 #include <RenderWindow.h>
 #include <SceneManager.h>
-#include <TextureManager.h>
+#include <AssetsManager.h>
 #include <SFML/Window/Event.hpp>
 
 SceneMain::SceneMain() : Scene{} { std::puts("OK SceneMain()."); }
 
 void SceneMain::init() {
-    TextureManager::get_instance().insert_texture("icon", "assets/images/icon.png");
+    TextureManager::get_instance()["icon"].loadFromFile("assets/images/icon.png");
 
     map_drawables["icon"].setTexture(TextureManager::get_instance()["icon"]);
     drawables.emplace_back(&map_drawables["icon"]);

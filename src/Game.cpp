@@ -6,7 +6,7 @@
 #include <Game.h>
 #include <RenderWindow.h>
 #include <SceneManager.h>
-#include <TextureManager.h>
+#include <AssetsManager.h>
 #include <Scene.h>
 #include <LoopTimer.h>
 
@@ -16,7 +16,8 @@ Game::Game(const std::string &title, const Size &size, const std::string &icon, 
     SceneManager::new_scene_manager();
     RenderWindow::new_render_window(title, size, icon);
     LoopTimer::new_loop_timer(fps);
-    TextureManager::new_texture_manager();
+    TextureManager::new_assets_manager();
+    MusicManager::new_assets_manager();
 
     std::puts("OK Game().");
 }
