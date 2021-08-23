@@ -23,8 +23,7 @@ void SceneMain::handle_events() {
 
     while(RenderWindow::get_instance().get_render_window().pollEvent(event))
         switch(event.type) {
-            case sf::Event::Closed:
-                close();
+            case sf::Event::Closed: close();
                 break;
 
             case sf::Event::KeyPressed:
