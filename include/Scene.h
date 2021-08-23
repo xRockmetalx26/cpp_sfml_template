@@ -20,6 +20,7 @@ public:
     virtual void handle_events() = 0;
     virtual void update() = 0;
     virtual void render() const = 0;
+    void close();
 
     bool is_paused() const;
     bool is_running() const;

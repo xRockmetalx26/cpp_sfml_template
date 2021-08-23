@@ -24,10 +24,8 @@ void SceneMain::handle_events() {
     while(RenderWindow::get_instance().get_render_window().pollEvent(event))
         switch(event.type) {
             case sf::Event::Closed:
-                running = false;
-                SceneManager::get_instance().set_next_scene(std::unique_ptr<Scene>() /*EXIT*/);
-                RenderWindow::get_instance().get_render_window().close();
-            break;
+                close();
+                break;
 
             case sf::Event::KeyPressed:
                 if(event.key.code == sf::Keyboard::Space)
