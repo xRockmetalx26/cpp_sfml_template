@@ -13,12 +13,10 @@
 std::unique_ptr<Game> Game::instance{};
 
 Game::Game(const std::string &title, const Size &size, const std::string &icon, const int fps) {
-    SceneManager::new_scene_manager();
     RenderWindow::new_render_window(title, size, icon);
     LoopTimer::new_loop_timer(fps);
-    TextureManager::new_assets_manager();
-    FontManager::new_assets_manager();
-    MusicManager::new_assets_manager();
+    SceneManager::new_scene_manager();
+    AssetsManager::new_assets_manager();
 
     std::puts("OK Game().");
 }
@@ -27,6 +25,7 @@ void Game::run() const {
     while(SceneManager::get_instance().contains_scene()) {
         Scene &current_scene{SceneManager::get_instance().get_current_scene()};
         current_scene.init();
+        std::puts("hola");
 
         while(current_scene.is_running()) {
             LoopTimer::get_instance().update();

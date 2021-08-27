@@ -11,7 +11,6 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/Music.hpp>
 
-template<class Type>
 class AssetsManager {
 public:
 
@@ -22,11 +21,14 @@ public:
     virtual ~AssetsManager();
 
     static AssetsManager& new_assets_manager();
+    sf::Texture* insert_texture(const std::string &key, const std::string &filename);
+    sf::Font* insert_font(const std::string &key, const std::string &filename);
+    sf::Music* insert_music(const std::string &key, const std::string &filename);
 
     static AssetsManager& get_instance();
-    Type& get(const std::string &key);
-
-    Type& operator[](const std::string &key);
+    sf::Texture* get_texture(const std::string &key);
+    sf::Font* get_font(const std::string &key);
+    sf::Music* get_music(const std::string &key);
 
 private:
 
@@ -34,11 +36,9 @@ private:
 
     static std::unique_ptr<AssetsManager> instance;
 
-    std::map<const std::string, Type> assets;
+    std::map<const std::string, std::unique_ptr<sf::Texture>> textures;
+    std::map<const std::string, std::unique_ptr<sf::Font>> fonts;
+    std::map<const std::string, std::unique_ptr<sf::Music>> musics;
 };
-
-using TextureManager = AssetsManager<sf::Texture>;
-using FontManager = AssetsManager<sf::Font>;
-using MusicManager = AssetsManager<sf::Music>;
 
 #endif // ASSETS_MANAGER_H

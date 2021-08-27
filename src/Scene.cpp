@@ -4,13 +4,21 @@
 
 #include <cstdio>
 #include <Scene.h>
-#include <RenderWindow.h>
 #include <SceneManager.h>
+#include <RenderWindow.h>
 
-Scene::Scene() { std::puts("OK Scene()."); }
+void Scene::render() const {
+    RenderWindow::get_instance().get_render_window().clear();
 
-bool Scene::is_paused() const { return pause; }
-bool Scene::is_running() const { return running; }
+    //BEGIN RENDER
+
+    for(const auto drawable: drawables)
+        RenderWindow::get_instance().get_render_window().draw(*drawable);
+
+    //END RENDER
+
+    RenderWindow::get_instance().get_render_window().display();
+}
 
 void Scene::close() {
     running = false;
@@ -18,4 +26,5 @@ void Scene::close() {
     RenderWindow::get_instance().get_render_window().close();
 }
 
-Scene::~Scene() { std::puts("OK ~Scene()."); }
+bool Scene::is_paused() const { return pause; }
+bool Scene::is_running() const { return running; }

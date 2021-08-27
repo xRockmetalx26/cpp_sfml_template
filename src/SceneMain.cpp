@@ -12,10 +12,10 @@
 SceneMain::SceneMain() : Scene{} { std::puts("OK SceneMain()."); }
 
 void SceneMain::init() {
-    TextureManager::get_instance()["icon"].loadFromFile("assets/images/icon.png");
+    AssetsManager::get_instance().insert_texture("icon", "assets/images/icon.png");
 
-    map_drawables["icon"].setTexture(TextureManager::get_instance()["icon"]);
-    drawables.emplace_back(&map_drawables["icon"]);
+    sprites["icon"] = std::make_unique<sf::Sprite>(*AssetsManager::get_instance().get_texture("icon"));
+    drawables.emplace_back(sprites["icon"].get());
 }
 
 void SceneMain::handle_events() {
@@ -36,32 +36,21 @@ void SceneMain::handle_events() {
 }
 
 void SceneMain::update() {
-    sf::Sprite &sprite{map_drawables["icon"]};
+    sf::Sprite &sprite{*sprites["icon"]};
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        sprite.move(-4.0, 0.0);
+        sprite.move(-6.0, 0.0);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        sprite.move(4.0, 0.0);
+        sprite.move(6.0, 0.0);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        sprite.move(0.0, 4.0);
+        sprite.move(0.0, 6.0);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        sprite.move(0.0, -4.0);
+        sprite.move(0.0, -6.0);
 }
 
-void SceneMain::render() const {
-    RenderWindow::get_instance().get_render_window().clear();
-
-    //BEGIN RENDER
-
-    for(const auto &drawable: drawables)
-        RenderWindow::get_instance().get_render_window().draw(*drawable);
-
-    //END RENDER
-
-    RenderWindow::get_instance().get_render_window().display();
-}
+void SceneMain::render() const { Scene::render(); }
 
 SceneMain::~SceneMain() { std::puts("OK ~SceneMain()."); }

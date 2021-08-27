@@ -8,8 +8,8 @@
 std::unique_ptr<RenderWindow> RenderWindow::instance{};
 
 RenderWindow::RenderWindow(const std::string &title, const Size &size, const std::string &icon) {
-    render_window = std::make_unique<sf::RenderWindow>(sf::VideoMode{size.get_width(), size.get_height()},
-                                                    title, sf::Style::Titlebar | sf::Style::Close);
+    render_window = std::make_unique<sf::RenderWindow>(sf::VideoMode{static_cast<unsigned int>(size.get_width()),
+        static_cast<unsigned int>(size.get_height())}, title, sf::Style::Titlebar | sf::Style::Close);
     if(not render_window) {
         std::puts("ERROR std::make_unique<sf::RenderWindow>()");
         exit(EXIT_FAILURE);
@@ -21,7 +21,7 @@ RenderWindow::RenderWindow(const std::string &title, const Size &size, const std
         exit(EXIT_FAILURE);
     }
 
-    const Size icon_size{128, 128};
+    const Size icon_size{32, 32};
 
     render_window->setVerticalSyncEnabled(true);
     render_window->setIcon(icon_size.get_width(), icon_size.get_height(), icon_image.getPixelsPtr());

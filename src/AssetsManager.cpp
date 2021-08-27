@@ -5,24 +5,13 @@
 #include <cstdio>
 #include <AssetsManager.h>
 
-template class AssetsManager<sf::Texture>;
-template class AssetsManager<sf::Font>;
-template class AssetsManager<sf::Music>;
+std::unique_ptr<AssetsManager> AssetsManager::instance{};
 
-template<class Type>
-std::unique_ptr<AssetsManager<Type>> AssetsManager<Type>::instance{};
+AssetsManager::AssetsManager() : textures{}, fonts{}, musics{} { std::puts("OK AssetsManager()."); }
 
-template<class Type>
-std::map<const std::string, Type> assets{};
+AssetsManager& AssetsManager::get_instance() { return *instance; }
 
-template<class Type>
-AssetsManager<Type>::AssetsManager() : assets{} { std::puts("OK AssetsManager()."); }
-
-template<class Type>
-AssetsManager<Type>& AssetsManager<Type>::get_instance() { return *instance; }
-
-template<class Type>
-AssetsManager<Type>& AssetsManager<Type>::new_assets_manager() {
+AssetsManager& AssetsManager::new_assets_manager() {
     if(not instance)
         instance.reset(new AssetsManager{});
 
@@ -34,11 +23,37 @@ AssetsManager<Type>& AssetsManager<Type>::new_assets_manager() {
     return *instance;
 }
 
-template<class Type>
-Type& AssetsManager<Type>::get(const std::string &key) { return assets[key]; }
+sf::Texture* AssetsManager::insert_texture(const std::string &key, const std::string &filename) {
+    textures[key] = std::make_unique<sf::Texture>();
+    textures[key].get()->loadFromFile(filename);
 
-template<class Type>
-Type& AssetsManager<Type>::operator[](const std::string &key) { return assets[key]; }
+    return textures[key].get();
+}
 
-template<class Type>
-AssetsManager<Type>::~AssetsManager() { std::puts("OK ~AssetsManager()."); }
+sf::Font* AssetsManager::insert_font(const std::string &key, const std::string &filename) {
+    fonts[key] = std::make_unique<sf::Font>();
+    fonts[key].get()->loadFromFile(filename);
+
+    return fonts[key].get();
+}
+
+sf::Music* AssetsManager::insert_music(const std::string &key, const std::string &filename) {
+    musics[key] = std::make_unique<sf::Music>();
+    musics[key].get()->openFromFile(filename);
+
+    return musics[key].get();
+}
+
+sf::Texture* AssetsManager::get_texture(const std::string &key) {
+    return textures[key].get();
+}
+
+sf::Font* AssetsManager::get_font(const std::string &key) {
+    return fonts[key].get();
+}
+
+sf::Music* AssetsManager::get_music(const std::string &key) {
+    return musics[key].get();
+}
+
+AssetsManager::~AssetsManager() { std::puts("OK ~AssetsManager()."); }

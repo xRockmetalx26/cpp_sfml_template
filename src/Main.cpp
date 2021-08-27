@@ -7,7 +7,7 @@
 #include <windows.h>
 
 int main(){
-    //FreeConsole();
+    FreeConsole();
     Game::new_game().run();
 
     return EXIT_SUCCESS;
